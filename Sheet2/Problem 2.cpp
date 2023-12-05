@@ -6,10 +6,12 @@
 // Date:4/12/2023
 // Version:1.0
 #include<bits/stdc++.h>
+
 using namespace std;
-class StringSet{
+
+class StringSet {
 private:
-    vector<string>words;
+    vector<string> words;
 
 public:
     //constructor that took a file name and insert it's string in the vector
@@ -28,50 +30,52 @@ public:
 
 
     //add string to the set
-    void addString(string str){
+    void addString(string str) {
         words.push_back(str);
     }
 
     //remove string from the set
-    void removeString(string str){
-        words.erase(remove(words.begin(),words.end(),str),words.end());
+    void removeString(string str) {
+        words.erase(remove(words.begin(), words.end(), str), words.end());
     }
 
     //clear set
-    void clearSet(){
+    void clearSet() {
         words.clear();
     }
 
     //return number os string
-    int size(){
+    int size() {
         return words.size();
     }
 
     //output the words in the set
-    void outputStrings(){
-        for(int i=0;i<words.size();i++){
-            cout<<words[i]<<" ";
+    void outputStrings() {
+        for (int i = 0; i < words.size(); i++) {
+            cout << words[i] << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
 
     //overload '+' operator
-    StringSet operator+(StringSet& other){
-        StringSet result=*this;
-        for(auto& word:result.words){
-            if(find(result.words.begin(),result.words.end(),word)==result.words.end()){
-                result.words.insert(result.words.end(),other.words.begin(),other.words.end());
+    StringSet operator+(StringSet &other) {
+        StringSet result = *this;
+
+        for (const auto &word: other.words) {
+            if (find(result.words.begin(), result.words.end(), word) == result.words.end()) {
+                result.words.push_back(word);
             }
         }
 
         return result;
     }
 
+
     //overload '*' operator
-    StringSet operator*(StringSet& other){
+    StringSet operator*(StringSet &other) {
         StringSet result("");
-        for(const auto& word:words){
-            if(find(other.words.begin(),other.words.end(),word)!=other.words.end()){
+        for (const auto &word: words) {
+            if (find(other.words.begin(), other.words.end(), word) != other.words.end()) {
                 result.addString(word);
             }
         }
@@ -79,31 +83,32 @@ public:
     }
 
     //similarity
-    double computeSimilarity(StringSet& other){
-        StringSet intersectionSet=*this*other;
-        int intersectionSize=intersectionSet.size();
-        double den=sqrt(words.size())*sqrt(other.words.size());
-        double similarity=intersectionSize/den;
+    double computeSimilarity(StringSet &other) {
+        StringSet intersectionSet = *this * other;
+        int intersectionSize = intersectionSet.size();
+        double den = sqrt(words.size()) * sqrt(other.words.size());
+        double similarity = intersectionSize / den;
         return similarity;
     }
 
 
 };
-int main(){
+
+int main() {
     StringSet s1("q2.2");
     StringSet s2("q2");
-    cout<<"File 1 words: ";
+    cout << "File 1 words: ";
     s1.outputStrings();
-    cout<<"File 2 words: ";
+    cout << "File 2 words: ";
     s2.outputStrings();
-    StringSet s3=s1+s2;
-    cout<<"union between 2 files: ";
+    StringSet s3 = s1 + s2;
+    cout << "union between 2 files: ";
     s3.outputStrings();
-    StringSet s4=s1*s2;
-    cout<<"Intersection between 2 files: ";
+    StringSet s4 = s1 * s2;
+    cout << "Intersection between 2 files: ";
     s4.outputStrings();
-    double similarity=s1.computeSimilarity(s2);
-    cout<<"Similarity between 2 files: "<<similarity;
+    double similarity = s1.computeSimilarity(s2);
+    cout << "Similarity between 2 files: " << similarity;
 
 
     return 0;
