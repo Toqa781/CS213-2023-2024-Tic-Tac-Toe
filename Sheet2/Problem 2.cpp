@@ -19,11 +19,24 @@ public:
     StringSet(string filename) {
         ifstream file(filename);
         string word;
-        while (file >> word) {
-            word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
-            transform(word.begin(), word.end(), word.begin(), ::tolower);
-            if (find(words.begin(), words.end(), word) == words.end()) {
-                words.push_back(word);
+        if(file.is_open()) {
+            while (file >> word) {
+                word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+                transform(word.begin(), word.end(), word.begin(), ::tolower);
+                if (find(words.begin(), words.end(), word) == words.end()) {
+                    words.push_back(word);
+                }
+            }
+        }
+        //if there is no file with that name take it as string
+        else{
+            istringstream iss(filename);
+            while(iss>>word){
+                word.erase(remove_if(word.begin(),word.end(),::ispunct),word.end());
+                transform(word.begin(),word.end(),word.begin(),::tolower);
+                if(find(words.begin(),words.end(),word)==words.end()){
+                    words.push_back(word);
+                }
             }
         }
     }
@@ -95,20 +108,29 @@ public:
 };
 
 int main() {
-    StringSet s1("q2.2");
+    StringSet s1("Chocolate ice cream, chocolate milk, and chocolate bars are delicious.");
     StringSet s2("q2");
-    cout << "File 1 words: ";
+    cout << "Set 1 words: ";
     s1.outputStrings();
-    cout << "File 2 words: ";
+    cout << "Set 2 words: ";
     s2.outputStrings();
     StringSet s3 = s1 + s2;
-    cout << "union between 2 files: ";
+    cout << "union between 2 sets: ";
     s3.outputStrings();
     StringSet s4 = s1 * s2;
-    cout << "Intersection between 2 files: ";
+    cout << "Intersection between 2 sets: ";
     s4.outputStrings();
     double similarity = s1.computeSimilarity(s2);
-    cout << "Similarity between 2 files: " << similarity;
+    cout << "Similarity between 2 sets: " << similarity<<endl;
+    cout<<"Size of set 1: ";
+    cout<<s1.size()<<endl;
+    cout<<"Remove 'love' word from set 2: ";
+    s2.removeString("love");
+    s2.outputStrings();
+    cout<<"Clear set 1"<<endl;
+    s1.clearSet();
+    cout<<"Set 1 words: ";
+    s1.outputStrings();
 
 
     return 0;
