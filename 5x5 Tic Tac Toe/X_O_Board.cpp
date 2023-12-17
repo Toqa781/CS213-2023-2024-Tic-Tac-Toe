@@ -50,7 +50,8 @@ void X_O_Board::display_board() {
 // Returns true if there is any winner
 // either X or O
 // Written in a complex way. DO NOT DO LIKE THIS.
-bool X_O_Board::is_winner() {
+int check = 0;
+bool TicTacToe5x5_Board::is_winner() {
     int Xcnt = 0, Ycnt = 0;
 
     // Check vertically
@@ -127,13 +128,14 @@ bool X_O_Board::is_winner() {
         cout << "X loses with " << Xcnt << " times 3Xs" << endl;
         return false;
     }
+    else if(Xcnt==Ycnt)
+        check = 1;
     return false;
 }
 
-
 // Return true if 24 moves are done and no winner
 bool X_O_Board::is_draw() {
-    return (n_moves == 24 && !is_winner());
+    return (n_moves == 24 && !is_winner() && check==1);
 }
 
 bool X_O_Board::game_is_over () {
