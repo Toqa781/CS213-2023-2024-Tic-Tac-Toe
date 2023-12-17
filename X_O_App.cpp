@@ -4,11 +4,7 @@
 // Version: 1
 
 #include <iostream>
-#include"BoardGame_Classes.hpp"
-#include "Player.cpp"
-#include "RandomPlayer.cpp"
-#include "GameManager.cpp"
-#include "X_O_Board.cpp"
+#include"../include/BoardGame_Classes.hpp"
 using namespace std;
 
 int main() {
@@ -25,7 +21,7 @@ int main() {
         //Player pointer points to child
         players[1] = new RandomPlayer ('o', 3);
 
-    GameManager x_o_game (new X_O_Board(), players);
+    GameManager x_o_game (new  Pyramic_X_O_Board(), players);
     x_o_game.run();
     system ("pause");
 }
