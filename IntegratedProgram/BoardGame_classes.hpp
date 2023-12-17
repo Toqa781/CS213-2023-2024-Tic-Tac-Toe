@@ -61,6 +61,17 @@ public:
     bool is_draw();
     bool game_is_over();
 };
+class Pyramic_X_O_Board:public Board{
+public:
+
+    Pyramic_X_O_Board ();
+    bool update_board (int x, int y, char mark);
+    void display_board();
+    bool is_winner();
+    bool is_draw();
+    bool game_is_over();
+};
+
 
 ///////////////////////////////////////////
 // This class represents a player who has
