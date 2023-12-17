@@ -10,7 +10,7 @@
 using namespace std;
 
 // Set the board
-X_O_Board::X_O_Board () {
+four_in_a_row_Board::four_in_a_row_Board () {
     n_rows =6;
     n_cols = 7;
     board = new char*[n_rows];
@@ -24,7 +24,7 @@ X_O_Board::X_O_Board () {
 // Return true  if move is valid and put it on board
 // within board boundaries in empty cell
 // Return false otherwise
-bool X_O_Board::update_board (int x, int y, char mark){
+bool four_in_a_row_Board::update_board (int x, int y, char mark){
     // Only update if move is valid
     if(y<0 || y>=n_cols){
         return false;
@@ -45,7 +45,7 @@ bool X_O_Board::update_board (int x, int y, char mark){
 }
 
 // Display the board and the pieces on it
-void X_O_Board::display_board() {
+void four_in_a_row_Board::display_board() {
     for (int i: {0,1,2,3,4,5}) {
         cout << "\n| ";
         for (int j: {0,1,2,3,4,5,6}) {
@@ -60,7 +60,7 @@ void X_O_Board::display_board() {
 // Returns true if there is any winner
 // either X or O
 // Written in a complex way. DO NOT DO LIKE THIS.
-bool X_O_Board::is_winner() {
+bool four_in_a_row_Board::is_winner() {
     //check horizontally
     for(int row=0;row<n_rows;row++){
         for(int col=0;col<=n_cols-4;col++){
@@ -110,10 +110,10 @@ bool X_O_Board::is_winner() {
 }
 
 // Return true if 9 moves are done and no winner
-bool X_O_Board::is_draw() {
+bool four_in_a_row_Board::is_draw() {
     return (n_moves == n_rows*n_cols);
 }
 
-bool X_O_Board::game_is_over () {
+bool four_in_a_row_Board::game_is_over () {
     return is_winner()||is_draw();
 }
