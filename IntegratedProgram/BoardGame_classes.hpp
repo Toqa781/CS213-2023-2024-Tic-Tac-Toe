@@ -33,9 +33,28 @@ public:
 ///////////////////////////////////////////
 // This class represents a 3 x 3 board
 // used in X_O game
+class X_O_Board:public Board {
+public:
+    X_O_Board ();
+    bool update_board (int x, int y, char mark);
+    void display_board();
+    bool is_winner();
+    bool is_draw();
+    bool game_is_over();
+};
 class four_in_a_row_Board:public Board {
 public:
     four_in_a_row_Board ();
+    bool update_board (int x, int y, char mark);
+    void display_board();
+    bool is_winner();
+    bool is_draw();
+    bool game_is_over();
+};
+
+class TicTacToe5x5_Board:public Board{
+public:
+    TicTacToe5x5_Board ();
     bool update_board (int x, int y, char mark);
     void display_board();
     bool is_winner();
