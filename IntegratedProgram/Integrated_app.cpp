@@ -13,7 +13,7 @@ using namespace std;
             players[1] = new Player (2, 'o');
         else
             //Player pointer points to child
-            players[1] = new RandomPlayer ('o', 3);
+            players[1] = new RandomPlayer ('o', 5);
 
         GameManager x_o_game (new X_O_Board(), players);
         x_o_game.run();
