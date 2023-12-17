@@ -6,7 +6,7 @@
 #include <random>
 #include <iomanip>
 #include <algorithm>
-#include "BoardGame_Classes.h"
+#include "BoardGame_Classes.hpp"
 using namespace std;
 
 // Set the board
@@ -19,10 +19,8 @@ TicTacToe5x5_Board::TicTacToe5x5_Board () {
             board[i][j] = 0;
     }
 }
-
-// Return true  if move is valid and put it on board
 // within board boundaries in empty cell
-// Return false otherwise
+// Return false always
 bool TicTacToe5x5_Board::update_board (int x, int y, char mark){
     // Only update if move is valid
     if (!(x < 0 || x > 4 || y < 0 || y > 4) && (board[x][y] == 0)) {
@@ -47,94 +45,95 @@ void TicTacToe5x5_Board::display_board() {
     cout << endl;
 }
 
-// Returns true if there is any winner
+// Returns false always
 // either X or O
-// Written in a complex way. DO NOT DO LIKE THIS.
+int check = 0;
 bool TicTacToe5x5_Board::is_winner() {
     int Xcnt = 0, Ycnt = 0;
-    //check vertically
-    for (int i = 0; i < n_rows; ++i) {
-        for (int j = 0; j <= n_cols - 5; ++j) {
-            if (board[i][j] == 'X' &&
-                board[i][j] == board[i][j + 1] && board[i][j] == 'X' &&
-                board[i][j] == board[i][j + 2] && board[i][j] == 'X' &&
-                board[i][j] == board[i][j + 3] && board[i][j] == 'X') {
-                Xcnt++;
-                //return true;
-            }
-        }
-    }
-    for (int i = 0; i < n_rows; ++i) {
-        for (int j = 0; j <= n_cols - 5; ++j) {
-            if (board[i][j] == 'O' &&
-                board[i][j] == board[i][j + 1] && board[i][j] == 'O' &&
-                board[i][j] == board[i][j + 2] && board[i][j] == 'O' &&
-                board[i][j] == board[i][j + 3] && board[i][j] == 'O') {
-                Ycnt++;
-                //return true;
-            }
-        }
-    }
-    //check horizontally
-    for (int i = 0; i <= n_rows - 5; ++i) {
-        for (int j = 0; j < n_cols; ++j) {
-            if (board[i][j] == 'O' &&
-                board[i][j] == board[i + 1][j] && board[i][j] == 'O' &&
-                board[i][j] == board[i + 2][j] && board[i][j] == 'O' &&
-                board[i][j] == board[i + 3][j] && board[i][j] == 'O') {
-                Ycnt++;
-                //return true;
-            }
-        }
-    }
-    for (int i = 0; i <= n_rows - 5; ++i) {
+
+    // Check vertically
+    for (int i = 0; i <= n_rows - 3; ++i) {
         for (int j = 0; j < n_cols; ++j) {
             if (board[i][j] == 'X' &&
-                board[i][j] == board[i + 1][j] && board[i][j] == 'X' &&
-                board[i][j] == board[i + 2][j] && board[i][j] == 'X' &&
-                board[i][j] == board[i + 3][j] && board[i][j] == 'X') {
+                board[i][j] == board[i + 1][j] && board[i+1][j] == 'X' &&
+                board[i][j] == board[i + 2][j] && board[i+2][j] == 'X') {
                 Xcnt++;
-                //return true;
+            }
+            if (board[i][j] == 'O' &&
+                board[i][j] == board[i + 1][j] && board[i+1][j] == 'O' &&
+                board[i][j] == board[i + 2][j] && board[i+2][j] == 'O') {
+                Ycnt++;
             }
         }
     }
-    //check diagonally
+
+    // Check horizontally
     for (int i = 0; i < n_rows; ++i) {
-        for (int j = 0; j < n_cols; ++j) {
-            if (i == j) {
-                if (board[i][j] == 'X') {
-                    Xcnt++;
-                    //return true;
-                }
+        for (int j = 0; j <= n_cols - 3; ++j) {
+            if (board[i][j] == 'X' &&
+                board[i][j] == board[i][j + 1] && board[i][j+1] == 'X' &&
+                board[i][j] == board[i][j + 2] && board[i][j+2] == 'X') {
+                Xcnt++;
+            }
+            if (board[i][j] == 'O' &&
+                board[i][j] == board[i][j + 1] && board[i][j+1] == 'O' &&
+                board[i][j] == board[i][j + 2] && board[i][j+2] == 'O') {
+                Ycnt++;
             }
         }
     }
-    for (int i = 0; i < n_rows; ++i) {
-        for (int j = 0; j < n_cols; ++j) {
-            if (i == j) {
-                if (board[i][j] == 'O') {
-                    Ycnt++;
-                    //return true;
-                }
+
+    // Check diagonally
+    for (int i = 0; i <= n_rows - 3; ++i) {
+        for (int j = 0; j <= n_cols - 3; ++j) {
+            if (board[i][j] == 'X' &&
+                board[i][j] == board[i + 1][j + 1] && board[i+1][j+1] == 'X' &&
+                board[i][j] == board[i + 2][j + 2] && board[i+2][j+2] == 'X') {
+                Xcnt++;
+            }
+            if (board[i][j] == 'O' &&
+                board[i][j] == board[i + 1][j + 1] && board[i+1][j+1] == 'O' &&
+                board[i][j] == board[i + 2][j + 2] && board[i+2][j+2] == 'O') {
+                Ycnt++;
             }
         }
     }
-    if (Xcnt>Ycnt) {
-        cout<<n_moves<<endl;
-        cout << "X wins by :"<<Xcnt<<endl;
-        cout << "Y wins by: "<<Ycnt<<endl;
+
+    // Check diagonally the other way
+    for (int i = 0; i <= n_rows - 3; ++i) {
+        for (int j = 2; j < n_cols; ++j) {
+            if (board[i][j] == 'X' &&
+                board[i][j] == board[i + 1][j - 1] && board[i+1][j-1] == 'X' &&
+                board[i][j] == board[i + 2][j - 2] && board[i+2][j-2] == 'X') {
+                Xcnt++;
+            }
+            if (board[i][j] == 'O' &&
+                board[i][j] == board[i + 1][j - 1] && board[i+1][j-1] == 'O' &&
+                board[i][j] == board[i + 2][j - 2] && board[i+2][j-2] == 'O') {
+                Ycnt++;
+            }
+        }
     }
-    else
-        cout<<n_moves<<endl;
-    cout << "X wins by :"<<Xcnt<<endl;
-    cout << "Y wins by: "<<Ycnt<<endl;
+
+    if (n_moves == 24 && Xcnt > Ycnt) {
+        cout << "X wins with " << Xcnt << " times 3Xs" << endl;
+        cout << "Y loses with " << Ycnt << " times 3Ys" << endl;
+        return false;
+    }
+    else if(n_moves == 24 && Ycnt > Xcnt){
+        cout << "Y wins with " << Ycnt << " times 3Ys" << endl;
+        cout << "X loses with " << Xcnt << " times 3Xs" << endl;
+        return false;
+    }
+    else if(Xcnt==Ycnt)
+        check = 1;
     return false;
 }
 // Return true if 9 moves are done and no winner
 bool TicTacToe5x5_Board::is_draw() {
-    return (n_moves == 25 && !is_winner());
+    return (n_moves == 24 && !is_winner() && check==1);
 }
 
 bool TicTacToe5x5_Board::game_is_over () {
-    return n_moves >= 25;
+    return n_moves >= 24;
 }
