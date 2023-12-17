@@ -2,7 +2,6 @@
 // Author:  Mohammad El-Ramly
 // Date:    10/10/2022
 // Version: 1
-//#include "BoardGame_Classes.hpp"
 #ifndef _BoardGame_CLASSES_H
 #define _BoardGame_CLASSES_H
 using namespace std;
@@ -30,6 +29,7 @@ public:
    virtual bool game_is_over() = 0;
 };
 
+
 ///////////////////////////////////////////
 // This class represents a 3 x 3 board
 // used in X_O game
@@ -41,6 +41,17 @@ public:
    bool is_winner();
    bool is_draw();
    bool game_is_over();
+};
+class Pyramic_X_O_Board: public Board{
+public:
+
+    Pyramic_X_O_Board();
+    bool update_board (int x, int y, char mark);
+    void display_board();
+    bool is_winner();
+    bool is_draw();
+    bool game_is_over();
+
 };
 
 ///////////////////////////////////////////
