@@ -21,7 +21,7 @@ int main() {
         //Player pointer points to child
         players[1] = new RandomPlayer ('o', 3);
 
-    GameManager x_o_game (new X_O_Board(), players);
+    GameManager x_o_game (new four_in_a_row_Board(), players);
     x_o_game.run();
     system ("pause");
 }
