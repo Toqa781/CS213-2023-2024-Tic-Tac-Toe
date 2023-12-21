@@ -28,7 +28,7 @@ public:
     virtual void display_board() = 0;
     // Return true if game is over
     virtual bool game_is_over() = 0;
-    virtual int MM(int,int,bool ,bool) = 0;
+    virtual int MM(int &x, int &y, bool, bool) = 0 ;
 };
 
 ///////////////////////////////////////////
@@ -55,6 +55,8 @@ public:
     bool is_winner();
     bool is_draw();
     bool game_is_over();
+    int MM(int &x, int &y, bool, bool);
+    int check_s();
 };
 
 class TicTacToe5x5_Board:public Board{
@@ -65,9 +67,9 @@ public:
     bool is_winner();
     bool is_draw();
     bool game_is_over();
-
-    int MM(int &x, int &y, bool ismax, bool frstime);
+    int MM(int &x, int &y, bool, bool);
     int check_s();
+
 };
 class Pyramic_X_O_Board:public Board{
 public:
@@ -78,6 +80,8 @@ public:
     bool is_winner();
     bool is_draw();
     bool game_is_over();
+    int MM(int &x, int &y, bool, bool);
+    int check_s();
 };
 
 
@@ -142,7 +146,7 @@ public:
     //      It takes a valid move as x, y pair (between 0 - 2)
     //      It updates board and displays otit
     //      If winner, declare so and end
-    //      If draw, declare so and end
+    //      If drawp   , declare so and end
 
 };
 
