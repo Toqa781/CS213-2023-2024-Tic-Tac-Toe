@@ -1,3 +1,9 @@
+// File name:Integarted_app.cpp
+// Purpose:Collect all the main functions of the game to show the list menu
+// Author(s):Toqa Abdalla,Habiba Ayman,Adham Salah
+// ID(s):20220093,20220103,20220051
+// Section:s7,8
+// Date:10/12/2023
 #include<bits/stdc++.h>
 #include "BoardGame_Classes.h"
 using namespace std;
