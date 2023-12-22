@@ -1,7 +1,9 @@
-// Class definition for XO game classes
-// Author:  Mohammad El-Ramly
-// Date:    10/10/2022
-// Version: 1
+// File name:BoardGame_Classes.hpp
+// Purpose:Header to collect all the classes of the games
+// Author(s):Toqa Abdalla,Habiba Ayman,Adham Salah
+// ID(s):20220093,20220103,20220051
+// Section:s7,8
+// Date:10/12/2023
 #ifndef _BoardGame_CLASSES_H
 #define _BoardGame_CLASSES_H
 #include<bits/stdc++.h>
