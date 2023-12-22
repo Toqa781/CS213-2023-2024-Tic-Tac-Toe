@@ -1,3 +1,9 @@
+// File name:PyramicTicTac.cpp
+// Purpose:Pyramic XO game
+// Author(s):Adham Salah
+// ID(s):20220051
+// Section:s7,8
+// Date:12/12/2023
 #include <iostream>
 #include <random>
 #include <iomanip>
