@@ -1,7 +1,9 @@
-// Class definition for X_O_Board class
-// Author:  Mohammad El-Ramly
-// Date:    10/10/2022
-// Version: 1
+// File name:TicTacToe5x5_Board.cpp
+// Purpose:5x5 XO
+// Author(s):Habiba Ayman
+// ID(s):20220103
+// Section:s7,8
+// Date:10/12/2023
 #include <iostream>
 #include <random>
 #include <iomanip>
